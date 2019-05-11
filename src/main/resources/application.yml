@@ -1,0 +1,24 @@
+# mybatis 配置
+mybatis:
+  typeAliasesPackage: com.zt.wechat.model
+  mapperLocations: classpath:mapper/*.xml
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://120.79.15.71:3306/WeChat?useSSL=false
+    username: zt
+    password: 123
+
+# 这里是默认配置
+spring.devtools.restart.enabled: true
+# 设置重启的目录
+spring.devtools.restart.additional-paths: src/main/java
+# classpath目录下的WEB-INF文件夹内容修改不重启
+
+server:
+  port: 5000
+  address: 0.0.0.0
+  tomcat:
+    uri-encoding: utf-8
