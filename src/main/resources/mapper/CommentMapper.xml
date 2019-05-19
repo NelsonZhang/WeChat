@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zt.wechat.dao.PictureMapper">
-  <resultMap id="BaseResultMap" type="com.zt.wechat.model.Picture">
-    <id column="ID" jdbcType="VARCHAR" property="id" />
-    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+<mapper namespace="com.zt.wechat.dao.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.zt.wechat.model.Comment">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user" jdbcType="VARCHAR" property="user" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
     <result column="url" jdbcType="VARCHAR" property="url" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -68,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, phone_number, time, content, address, url
+    id, user, comment, time, picture, url
   </sql>
-  <select id="selectByExample" parameterType="com.zt.wechat.model.PictureExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.zt.wechat.model.CommentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from picture
+    from comment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,44 +87,44 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from picture
-    where ID = #{id,jdbcType=VARCHAR}
+    from comment
+    where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from picture
-    where ID = #{id,jdbcType=VARCHAR}
+    delete from comment
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.zt.wechat.model.PictureExample">
-    delete from picture
+  <delete id="deleteByExample" parameterType="com.zt.wechat.model.CommentExample">
+    delete from comment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zt.wechat.model.Picture">
-    insert into picture (ID, phone_number, time, 
-      content, address, url
+  <insert id="insert" parameterType="com.zt.wechat.model.Comment">
+    insert into comment (id, user, comment, 
+      time, picture, url
       )
-    values (#{id,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
-      #{content,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}
+    values (#{id,jdbcType=VARCHAR}, #{user,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{picture,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.zt.wechat.model.Picture">
-    insert into picture
+  <insert id="insertSelective" parameterType="com.zt.wechat.model.Comment">
+    insert into comment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        ID,
+        id,
       </if>
-      <if test="phoneNumber != null">
-        phone_number,
+      <if test="user != null">
+        user,
+      </if>
+      <if test="comment != null">
+        comment,
       </if>
       <if test="time != null">
         time,
       </if>
-      <if test="content != null">
-        content,
-      </if>
-      <if test="address != null">
-        address,
+      <if test="picture != null">
+        picture,
       </if>
       <if test="url != null">
         url,
@@ -134,46 +134,46 @@
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="phoneNumber != null">
-        #{phoneNumber,jdbcType=VARCHAR},
+      <if test="user != null">
+        #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
       </if>
       <if test="time != null">
         #{time,jdbcType=TIMESTAMP},
       </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        #{address,jdbcType=VARCHAR},
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
       </if>
       <if test="url != null">
         #{url,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.zt.wechat.model.PictureExample" resultType="java.lang.Long">
-    select count(*) from picture
+  <select id="countByExample" parameterType="com.zt.wechat.model.CommentExample" resultType="java.lang.Long">
+    select count(*) from comment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update picture
+    update comment
     <set>
       <if test="record.id != null">
-        ID = #{record.id,jdbcType=VARCHAR},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.phoneNumber != null">
-        phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      <if test="record.user != null">
+        user = #{record.user,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comment != null">
+        comment = #{record.comment,jdbcType=VARCHAR},
       </if>
       <if test="record.time != null">
         time = #{record.time,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=VARCHAR},
-      </if>
-      <if test="record.address != null">
-        address = #{record.address,jdbcType=VARCHAR},
+      <if test="record.picture != null">
+        picture = #{record.picture,jdbcType=VARCHAR},
       </if>
       <if test="record.url != null">
         url = #{record.url,jdbcType=VARCHAR},
@@ -184,45 +184,45 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update picture
-    set ID = #{record.id,jdbcType=VARCHAR},
-      phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+    update comment
+    set id = #{record.id,jdbcType=VARCHAR},
+      user = #{record.user,jdbcType=VARCHAR},
+      comment = #{record.comment,jdbcType=VARCHAR},
       time = #{record.time,jdbcType=TIMESTAMP},
-      content = #{record.content,jdbcType=VARCHAR},
-      address = #{record.address,jdbcType=VARCHAR},
+      picture = #{record.picture,jdbcType=VARCHAR},
       url = #{record.url,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zt.wechat.model.Picture">
-    update picture
+  <update id="updateByPrimaryKeySelective" parameterType="com.zt.wechat.model.Comment">
+    update comment
     <set>
-      <if test="phoneNumber != null">
-        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      <if test="user != null">
+        user = #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
       </if>
       <if test="time != null">
         time = #{time,jdbcType=TIMESTAMP},
       </if>
-      <if test="content != null">
-        content = #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        address = #{address,jdbcType=VARCHAR},
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
       </if>
       <if test="url != null">
         url = #{url,jdbcType=VARCHAR},
       </if>
     </set>
-    where ID = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zt.wechat.model.Picture">
-    update picture
-    set phone_number = #{phoneNumber,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.zt.wechat.model.Comment">
+    update comment
+    set user = #{user,jdbcType=VARCHAR},
+      comment = #{comment,jdbcType=VARCHAR},
       time = #{time,jdbcType=TIMESTAMP},
-      content = #{content,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

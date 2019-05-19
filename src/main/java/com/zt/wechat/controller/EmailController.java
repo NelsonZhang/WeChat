@@ -22,40 +22,57 @@ public class EmailController {
     private Message message;
 
     @RequestMapping(value = "/getEmail", method = RequestMethod.POST)
-    public Message getEmail(String phoneNumber) {
-        EmailExample emailExample = new EmailExample();
-        EmailExample.Criteria criteria = emailExample.createCriteria();
-        criteria.andSenderNumberEqualTo(phoneNumber);
-        List<Email> list = emailService.getEmail(emailExample);
+    public Message getEmail(String id) {
         message = new Message();
-        if (list != null) {
-            message.setCode("1");
-            message.setMessage("success");
-            message.setData(list);
+        try {
+            EmailExample emailExample = new EmailExample();
+            EmailExample.Criteria criteria = emailExample.createCriteria();
+            criteria.andUserEqualTo(id);
+            List<Email> list = emailService.getEmail(emailExample);
+            if (!list.isEmpty()) {
+                message.setCode("1");
+                message.setMessage("success");
+                message.setData(list);
+            }
+        } catch (Exception e) {
+            message.setMessage(e.getMessage());
         }
+
         return message;
     }
 
     @RequestMapping(value = "/deleteEmail", method = RequestMethod.POST)
     public Message deleteEmail(String id) {
         message = new Message();
-        if (emailService.deleteEmail(id) == 1) {
-            message.setCode("1");
-            message.setMessage("success");
+        try {
+            if (emailService.deleteEmail(id) == 1) {
+                message.setCode("1");
+                message.setMessage("success");
+            }
+        } catch (Exception e) {
+            message.setMessage(e.getMessage());
         }
         return message;
     }
 
     @RequestMapping(value = "/insertEmail", method = RequestMethod.POST)
     public Message insertEmail(Email email) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-        Date date = new Date();
-        String time = format.format(date);
-        email.setId(time);
         message = new Message();
-        if (emailService.insertEmail(email) == 1) {
-            message.setCode("1");
-            message.setMessage("success");
+        try{
+            SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+            Date date;
+            synchronized (EmailController.class) {
+                date = new Date();
+            }
+            String time = format.format(date);
+            email.setId(time);
+            email.setTime(date);
+            if (emailService.insertEmail(email) == 1) {
+                message.setCode("1");
+                message.setMessage("success");
+            }
+        }catch (Exception e) {
+            message.setMessage(e.getMessage());
         }
         return message;
     }

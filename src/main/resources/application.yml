@@ -11,14 +11,13 @@ spring:
     username: zt
     password: 123
 
-# 这里是默认配置
-spring.devtools.restart.enabled: true
-# 设置重启的目录
-spring.devtools.restart.additional-paths: src/main/java
-# classpath目录下的WEB-INF文件夹内容修改不重启
 
 server:
-  port: 5000
-  address: 0.0.0.0
+  ssl:
+    key-store: classpath:2055229_dyt.ink.pfx
+    key-store-password: rx1czXO6
+    key-store-type: PKCS12
   tomcat:
     uri-encoding: utf-8
+  port: 5000
+  address: 0.0.0.0

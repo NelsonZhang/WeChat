@@ -28,4 +28,17 @@ public class PictureService {
     public List<Picture> getPicture(PictureExample pictureExample) {
         return pictureMapper.selectByExample(pictureExample);
     }
+
+    public int updateUpNum(String id) {
+        Picture picture = pictureMapper.selectByPrimaryKey(id);
+        picture.setUpnum(picture.getUpnum() + 1);
+        return pictureMapper.updateByPrimaryKey(picture);
+    }
+
+    public int updateReadingNum(String id) {
+        Picture picture = pictureMapper.selectByPrimaryKey(id);
+        picture.setReadingnum(picture.getReadingnum() + 1);
+        return pictureMapper.updateByPrimaryKey(picture);
+    }
+
 }
