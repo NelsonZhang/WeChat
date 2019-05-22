@@ -46,9 +46,9 @@
 
 <!--        <table tableName="picture" domainObjectName="Picture"/>-->
 <!--        <table tableName="style" domainObjectName="Style"/>-->
-<!--        <table tableName="email" domainObjectName="Email"/>-->
+        <table tableName="email" domainObjectName="Email"/>
 <!--        <table tableName="user" domainObjectName="User"/>-->
-        <table tableName="comment" domainObjectName="Comment"/>
+<!--        <table tableName="comment" domainObjectName="Comment"/>-->
 
 
 

@@ -4,7 +4,6 @@ import com.zt.wechat.Message;
 import com.zt.wechat.Picture_User;
 import com.zt.wechat.model.Picture;
 import com.zt.wechat.model.PictureExample;
-import com.zt.wechat.model.User;
 import com.zt.wechat.service.PictureService;
 import com.zt.wechat.service.UserService;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +32,11 @@ public class PictureController {
             Picture picture = pictureService.getPicture(id);
 
             if (picture != null) {
+
+                synchronized (PictureController.class) {
+                    pictureService.updateReadingNum(picture.getId());
+                }
+
                 message.setCode("1");
                 message.setMessage("success");
                 message.setData(picture);
@@ -111,9 +115,13 @@ public class PictureController {
                 List<Picture_User> temp = new ArrayList<>();//将图片与对应的用户进行关联。
                 Picture_User pictureUser;
                 for (int i = 0; i < list.size(); i++) {
+                    Picture picture = list.get(i);
                     pictureUser = new Picture_User();
-                    pictureUser.setPicture(list.get(i));
-                    pictureUser.setUser(userService.getUser(list.get(i).getUser()));
+                    pictureUser.setPicture(picture);
+                    pictureUser.setUser(userService.getUser(picture.getUser()));
+                    synchronized (PictureController.class) {
+                        pictureService.updateReadingNum(picture.getId());
+                    }
                     temp.add(pictureUser);
                 }
 

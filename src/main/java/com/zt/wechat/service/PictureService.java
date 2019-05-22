@@ -21,10 +21,6 @@ public class PictureService {
         return pictureMapper.deleteByPrimaryKey(id);
     }
 
-    public int insertPicture(Picture picture) {
-        return pictureMapper.insert(picture);
-    }
-
     public List<Picture> getPicture(PictureExample pictureExample) {
         return pictureMapper.selectByExample(pictureExample);
     }

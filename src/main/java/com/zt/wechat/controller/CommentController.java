@@ -1,6 +1,7 @@
 package com.zt.wechat.controller;
 
 import com.zt.wechat.Comment_User;
+import com.zt.wechat.Information;
 import com.zt.wechat.Message;
 import com.zt.wechat.model.Comment;
 import com.zt.wechat.model.CommentExample;
@@ -71,13 +72,13 @@ public class CommentController {
                 String imageName = file.getOriginalFilename();
                 imageName = time + "." + imageName.substring(imageName.lastIndexOf(".") + 1);
 
-                File dir = new File("/var/www/html/zt/Comment/" + comment.getPicture() + "/");
+                File dir = new File(Information.PATH + "Comment/" + comment.getPicture() + "/");
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
                 File fil = new File(dir, imageName);
                 file.transferTo(fil);
-                String url = "https://120.77.178.170/zt/Comment/" + comment.getPicture() + "/" + imageName;
+                String url = Information.URL + "Comment/" + comment.getPicture() + "/" + imageName;
                 comment.setUrl(url);
             }
 

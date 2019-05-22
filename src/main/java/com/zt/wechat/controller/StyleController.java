@@ -1,5 +1,6 @@
 package com.zt.wechat.controller;
 
+import com.zt.wechat.Information;
 import com.zt.wechat.Message;
 import com.zt.wechat.model.Style;
 import com.zt.wechat.model.StyleExample;
@@ -63,14 +64,13 @@ public class StyleController {
             String imageName = file.getOriginalFilename();
             imageName = time + "." + imageName.substring(imageName.lastIndexOf(".") + 1);
             String path = style.getProvince() + "/" + style.getCity() + "/";
-            File dir = new File("/var/www/html/zt/Style/" + path);
-//        File dir = new File("D:/JavaProgram/wechat/Style/" + path);
+            File dir = new File(Information.PATH + "Style/" + path);
             if (!dir.exists()) {
                 dir.mkdirs();
             }
             File fil = new File(dir, imageName);
             file.transferTo(fil);
-            String url = "https://120.77.178.170/zt/Style/" + path + imageName;
+            String url = Information.URL + "Style/" + path + imageName;
 
             style.setId(time);
             style.setUrl(url);
