@@ -24,7 +24,7 @@ public class EmailController {
 
     private Message message;
 
-    @RequestMapping(value = "/getEmail", method = RequestMethod.POST)
+    @RequestMapping(value = "/getEmail", method = RequestMethod.GET)
     public Message getEmail(String id) {
         message = new Message();
         try {
@@ -44,7 +44,7 @@ public class EmailController {
         return message;
     }
 
-    @RequestMapping(value = "/deleteEmail", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteEmail", method = RequestMethod.GET)
     public Message deleteEmail(String id) {
         message = new Message();
         try {

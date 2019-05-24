@@ -30,7 +30,7 @@ public class CommentController {
 
     private Message message;
 
-    @RequestMapping(value = "/getComment", method = RequestMethod.POST)
+    @RequestMapping(value = "/getComment", method = RequestMethod.GET)
     public Message getComment(String id) {
         message = new Message();
         try {

@@ -24,7 +24,7 @@ public class StyleController {
 
     private Message message;
 
-    @RequestMapping(value = "/getStyle", method = RequestMethod.POST)
+    @RequestMapping(value = "/getStyle", method = RequestMethod.GET)
     public Message getStyle(String province, String city) {
         message = new Message();
         try {

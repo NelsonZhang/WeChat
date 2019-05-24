@@ -25,7 +25,7 @@ public class PictureController {
 
     private Message message;
 
-    @RequestMapping(value = "/getPictureByPictureID", method = RequestMethod.POST)
+    @RequestMapping(value = "/getPictureByPictureID", method = RequestMethod.GET)
     public Message getPictureByID(String id) {
         message = new Message();
         try {
@@ -47,7 +47,7 @@ public class PictureController {
         return message;
     }
 
-    @RequestMapping(value = "/getPictureByUserID", method = RequestMethod.POST)
+    @RequestMapping(value = "/getPictureByUserID", method = RequestMethod.GET)
     public Message getPictureByUserID(String id) {
         message = new Message();
         try {
@@ -67,7 +67,7 @@ public class PictureController {
         return message;
     }
 
-    @RequestMapping(value = "/deletePicture", method = RequestMethod.POST)
+    @RequestMapping(value = "/deletePicture", method = RequestMethod.GET)
     public Message deletePicture(String id) {
         message = new Message();
         try {
@@ -82,7 +82,7 @@ public class PictureController {
         return message;
     }
 
-    @RequestMapping(value = "/updateUpNum", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateUpNum", method = RequestMethod.GET)
     public synchronized Message updateUpNum(String id) {
         message = new Message();
         try {
@@ -119,9 +119,9 @@ public class PictureController {
                     pictureUser = new Picture_User();
                     pictureUser.setPicture(picture);
                     pictureUser.setUser(userService.getUser(picture.getUser()));
-                    synchronized (PictureController.class) {
-                        pictureService.updateReadingNum(picture.getId());
-                    }
+//                    synchronized (PictureController.class) {
+//                        pictureService.updateReadingNum(picture.getId());
+//                    }
                     temp.add(pictureUser);
                 }
 

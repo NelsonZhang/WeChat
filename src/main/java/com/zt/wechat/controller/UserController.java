@@ -17,7 +17,7 @@ public class UserController {
     UserService userService;
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public Message login(String code, String name, String url) {
         Message message = new Message();
         try {
@@ -30,6 +30,12 @@ public class UserController {
                 user.setId(openid);
                 user.setAvatar(url);
                 user.setName(name);
+                if (userService.register(user) == 1) {
+                    message.setCode("1");
+                    message.setMessage("success");
+                    message.setData(user);
+                }
+            } else {
                 message.setCode("1");
                 message.setMessage("success");
                 message.setData(user);
